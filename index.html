@@ -1,734 +1,550 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IDDO Design Office — グラフィック・アプリ・創作活動</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --ink: #000000;
-      --paper: #ffffff;
-      --gray: #888888;
-      --light-gray: #e8e8e8;
-      --serif: 'Noto Serif JP', serif;
-      --sans: 'Noto Sans JP', sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDDO — iwasaki design delivery officer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500&family=Noto+Sans+JP:wght@300;400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --sans: 'Shippori Mincho B1', serif;
+    --gothic: 'Noto Sans JP', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 22.5px; background-color: #ffffff; scroll-behavior: smooth; }
 
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-    }
+  body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+    letter-spacing: 0.08em;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    body {
-      background-color: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-weight: 400;
-      line-height: 1.8;
-      letter-spacing: 0.05em;
-      -webkit-font-smoothing: antialiased;
-    }
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #000000;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    color: #000000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .nav-cta {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+    padding-bottom: 2px;
+  }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 4rem;
-      background-color: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid var(--ink);
-    }
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10rem 4rem;
+    border-right: 1px solid #000000;
+  }
+  .hero-eyebrow {
+    font-family: var(--gothic);
+    font-size: 0.875rem;
+    letter-spacing: 0.5em;
+    margin-bottom: 4rem;
+    font-weight: 100;
+  }
+  .hero-title {
+    font-size: clamp(3rem, 7vw, 6.2rem);
+    font-weight: 100;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    font-feature-settings: "palt" 1;
+  }
+  .hero-title em {
+    font-style: normal;
+    font-weight: 400;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10rem 4rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 2.3;
+    max-width: 100%;
+    margin-bottom: 6rem;
+    font-weight: 300;
+    font-family: var(--gothic);
+  }
 
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 0.95rem;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-decoration: none;
-      color: var(--ink);
-    }
+  /* SECTIONS */
+  section:not(#hero) {
+    padding: 12rem 4rem;
+    border-top: 1px solid #000000;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 6rem;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 100;
+    line-height: 1.3;
+    letter-spacing: 0.1em;
+  }
+  .main-text {
+    font-size: 1.15rem;
+    line-height: 2.4;
+    font-weight: 300;
+    font-family: var(--gothic);
+  }
 
-    .nav-cta {
-      font-family: var(--sans);
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-decoration: none;
-      color: var(--ink);
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 4px;
-    }
+  /* BODY MODEL */
+  .body-model {
+    margin: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .body-row {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .body-row:first-child {
+    border-top: 1px solid #e8e8e8;
+  }
+  .body-organ {
+    font-size: 0.78rem;
+    text-align: right;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: #888;
+    font-family: var(--gothic);
+    flex: 0 0 5rem;
+  }
+  .body-divider {
+    height: 1px;
+    flex: 0 0 1.2rem;
+    background-color: #000;
+    margin: 0 1.5rem;
+  }
+  .body-meaning {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: var(--gothic);
+    flex: 0 0 10rem;
+  }
+  .body-sub {
+    font-size: 0.78rem;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: #888;
+    font-family: var(--gothic);
+    flex: 1;
+  }
 
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      padding-top: 6rem;
-      border-top: none;
-    }
+  /* CYCLE FLOW */
+  .cycle-flow {
+    margin: 5rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .cycle-step {
+    display: flex;
+    align-items: baseline;
+    padding: 2rem 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .cycle-step:first-child {
+    border-top: 1px solid #e8e8e8;
+  }
+  .cycle-num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #888;
+    flex: 0 0 4rem;
+    text-align: right;
+    padding-right: 2rem;
+  }
+  .cycle-title {
+    font-size: 1.05rem;
+    font-weight: 400;
+    font-family: var(--gothic);
+    margin-right: 2rem;
+  }
+  .cycle-sub {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: #888;
+    font-family: var(--gothic);
+  }
+  .cycle-conclusion {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    border: 1px solid #000;
+  }
+  .cycle-conclusion p {
+    font-size: 1.05rem;
+    line-height: 2.2;
+    font-weight: 300;
+    font-family: var(--gothic);
+  }
 
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 8rem 4rem;
-      border-right: 1px solid var(--ink);
-    }
+  /* WORK */
+  .work-grid {
+    margin-top: 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4rem;
+  }
+  .work-phase-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.5rem;
+  }
+  .work-phase-title {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    font-family: var(--gothic);
+  }
+  .work-phase-desc {
+    font-size: 0.9rem;
+    line-height: 2;
+    font-weight: 300;
+    font-family: var(--gothic);
+  }
 
-    .hero-eyebrow {
-      font-family: var(--sans);
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      margin-bottom: 3rem;
-      font-weight: 300;
-      color: var(--gray);
-    }
-
-    .hero-title {
-      font-family: var(--serif);
-      font-size: 3.2rem;
-      font-weight: 400;
-      line-height: 1.4;
-      letter-spacing: 0.04em;
-      margin-bottom: 4rem;
-    }
-
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 8rem 4rem;
-    }
-
-    .hero-desc {
-      font-size: 0.95rem;
-      line-height: 2;
-      max-width: 100%;
-      margin-bottom: 4rem;
-      font-weight: 300;
-      font-family: var(--sans);
-    }
-
-    .hero-tagline {
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      border-top: 1px solid var(--ink);
-      padding-top: 2rem;
-      font-weight: 300;
-      font-family: var(--sans);
-      color: var(--gray);
-    }
-
-    /* ── SECTIONS ── */
-    section:not(#hero) {
-      padding: 10rem 4rem;
-      border-top: 1px solid var(--ink);
-    }
-
-    .section-label {
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      margin-bottom: 4rem;
-      font-weight: 400;
-      color: var(--gray);
-      text-transform: uppercase;
-    }
-
-    h2 {
-      font-family: var(--serif);
-      font-size: 2.2rem;
-      font-weight: 400;
-      line-height: 1.4;
-      letter-spacing: 0.04em;
-      margin-bottom: 3rem;
-    }
-
-    .main-text {
-      font-size: 0.95rem;
-      line-height: 2;
-      font-weight: 300;
-      font-family: var(--sans);
-      max-width: 100%;
-    }
-
-    /* ── PHILOSOPHY MODEL ── */
-    .body-model {
-      margin: 4rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .body-row {
-      display: flex;
-      align-items: center;
-      padding: 1.2rem 0;
-      border-bottom: 1px solid var(--light-gray);
-      gap: 0;
-    }
-
-    .body-row:first-child {
-      border-top: 1px solid var(--light-gray);
-    }
-
-    .body-organ {
-      font-size: 0.75rem;
-      text-align: right;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      color: var(--gray);
-      font-family: var(--sans);
-      flex: 0 0 4rem;
-    }
-
-    .body-divider {
-      height: 1px;
-      flex: 0 0 1.2rem;
-      background-color: var(--ink);
-      margin: 0 1.5rem;
-    }
-
-    .body-meaning {
-      font-size: 0.9rem;
-      font-weight: 400;
-      font-family: var(--sans);
-      flex: 0 0 9rem;
-    }
-
-    .body-sub {
-      font-size: 0.75rem;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      color: var(--gray);
-      font-family: var(--sans);
-      flex: 1;
-    }
-
-    /* ── WORK GRID ── */
-    .work-grid {
-      margin-top: 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .work-phase {
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--light-gray);
-    }
-
-    .work-phase-label {
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      margin-bottom: 1.2rem;
-      color: var(--gray);
-      text-transform: uppercase;
-    }
-
-    .work-phase-title {
-      font-size: 1.1rem;
-      font-weight: 400;
-      font-family: var(--serif);
-      margin-bottom: 1rem;
-    }
-
-    .work-phase-desc {
-      font-size: 0.85rem;
-      line-height: 1.8;
-      font-weight: 300;
-      color: #555;
-    }
-
-    /* ── TWO COLUMN ── */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-    }
-
-    .highlight-box {
-      border-left: 2px solid var(--ink);
-      padding-left: 2rem;
-      margin-top: 2rem;
-    }
-
-    .highlight-box p {
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.9;
-      font-family: var(--sans);
-    }
-
-    /* ── CONTACT ── */
-    .contact-box {
-      border: 1px solid var(--ink);
-      padding: 2rem;
-      margin-top: 2rem;
-      margin-bottom: 3rem;
-      max-width: 400px;
-    }
-
-    .contact-box-title {
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      margin-bottom: 1rem;
-      color: var(--gray);
-      text-transform: uppercase;
-    }
-
-    .contact-box-heading {
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-    }
-
-    .contact-box-text {
-      font-size: 0.8rem;
-      line-height: 1.7;
-      font-weight: 300;
-      color: #555;
-      margin-bottom: 0.8rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: baseline;
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-item-label {
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      min-width: 6rem;
-      color: var(--gray);
-      text-transform: uppercase;
-    }
-
-    .contact-item-value {
-      color: var(--ink);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      flex: 1;
-    }
-
-    .contact-item-value:hover {
-      text-decoration: underline;
-    }
-
-    /* ── NOTE SECTION ── */
-    .note-section {
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .note-label {
-      font-family: var(--sans);
-      font-size: 0.7rem;
-      letter-spacing: 0.4em;
-      margin-bottom: 3rem;
-      color: var(--gray);
-      text-transform: uppercase;
-    }
-
-    .note-text {
-      font-size: 1rem;
-      line-height: 2.2;
-      font-weight: 300;
-      margin-bottom: 2rem;
-    }
-
-    .note-credit {
-      font-size: 0.75rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--gray);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 4rem;
-      border-top: 1px solid var(--ink);
-      background: var(--paper);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-
-    .footer-left {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .footer-logo {
-      font-family: var(--serif);
-      font-size: 0.9rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-text {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      font-weight: 300;
-      color: var(--gray);
-    }
-
-    .footer-right {
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      #hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-left {
-        border-right: none;
-        border-bottom: 1px solid var(--ink);
-      }
-
-      .two-col {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .work-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section:not(#hero) {
-        padding: 6rem 2rem;
-      }
-
-      nav {
-        padding: 1.5rem 2rem;
-      }
-
-      .hero-left,
-      .hero-right {
-        padding: 4rem 2rem;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 2rem;
-        text-align: left;
-      }
-
-      .footer-right {
-        text-align: left;
-      }
-
-      h2 {
-        font-size: 1.8rem;
-      }
-    }
-
-    /* ── HIDDEN SECTIONS ── */
-    .portfolio-section {
-      display: none;
-    }
-
-    .portfolio-section.active {
-      display: block;
-    }
-  </style>
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    html { font-size: 16px; }
+    nav { padding: 1.5rem 2rem; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-left { border-right: none; border-bottom: 1px solid #000000; }
+    section:not(#hero) { padding: 8rem 2rem; }
+    .two-col { grid-template-columns: 1fr !important; gap: 4rem !important; }
+    .work-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-desc { font-size: 0.9rem; }
+    h2 { font-size: clamp(1.8rem, 6vw, 3rem); }
+    .body-row { display: flex; align-items: center; padding: 1rem 0; }
+    .body-organ { flex: 0 0 4rem; font-size: 0.65rem; }
+    .body-divider { flex: 0 0 1.2rem; margin: 0 1rem; }
+    .body-meaning { font-size: 0.9rem; flex: 0 0 auto; margin-right: 1rem; }
+    .body-sub { font-size: 0.68rem; }
+    .body-model { margin: 2rem 0; }
+    .philosophy-text { margin-top: 2rem !important; }
+    .cycle-step { flex-wrap: wrap; gap: 0.3rem; }
+    .cycle-num { flex: 0 0 3rem; padding-right: 1rem; }
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="#hero" class="nav-logo">IDDO</a>
-    <a href="#contact" class="nav-cta">CONTACT →</a>
-  </nav>
+<nav>
+  <a href="#hero" class="nav-logo">iddo</a>
+  <a href="#contact" class="nav-cta">CONTACT &rarr;</a>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-left">
-      <p class="hero-eyebrow">創造性と経営思想で</p>
-      <h1 class="hero-title">
-        ブランドの本質を<br>
-        整える
-      </h1>
-    </div>
-    <div class="hero-right">
-      <p class="hero-desc">
-        美しいデザインも優れたアプリも<br>
-        経営思想が整っていなければ、<br>
-        持続しない。<br><br>
-        IDDOは、ビジネスの根本から<br>
-        一緒に考える。
-      </p>
-      <p class="hero-tagline">ロゴ・パッケージ・アプリ・創作活動</p>
-    </div>
-  </section>
+<!-- HERO -->
+<section id="hero" style="border-top:none; padding:0;">
+  <div class="hero-left">
+    <p class="hero-eyebrow">AI時代のデザイン事務所のあり方</p>
+    <h1 class="hero-title">
+      経営思想を<br>
+      <em>整える</em>
+    </h1>
+  </div>
+  <div class="hero-right">
+    <p class="hero-desc">
+      うまくいっているのに、どこかおかしい。その感覚が、正しい。<br><br>
+      IDDOは、言葉にならない違和感を引き出し、思想を整えます。
+    </p>
+  </div>
+</section>
 
-  <!-- PHILOSOPHY -->
-  <section id="philosophy">
-    <p class="section-label">01 — Philosophy</p>
-    <div class="two-col">
-      <div>
-        <h2>デザインは思想の<br>表現である</h2>
-        <div class="body-model">
-          <div class="body-row">
-            <span class="body-organ">思想</span>
-            <div class="body-divider"></div>
-            <span class="body-meaning">Why</span>
-            <span class="body-sub">なぜやるのか</span>
-          </div>
-          <div class="body-row">
-            <span class="body-organ">戦略</span>
-            <div class="body-divider"></div>
-            <span class="body-meaning">How</span>
-            <span class="body-sub">どう伝えるか</span>
-          </div>
-          <div class="body-row">
-            <span class="body-organ">表現</span>
-            <div class="body-divider"></div>
-            <span class="body-meaning">What</span>
-            <span class="body-sub">何を作るか</span>
-          </div>
-        </div>
+<!-- 01 PHILOSOPHY -->
+<section id="philosophy">
+  <p class="section-label">01 &mdash; PHILOSOPHY</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;" class="two-col">
+    <div>
+      <h2 style="font-size: clamp(1.6rem, 3.5vw, 3rem);">会社を<br>人として捉える</h2>
+      <div class="body-model">
+        <div class="body-row"><span class="body-organ">腸</span><div class="body-divider"></div><span class="body-meaning">思想</span><span class="body-sub">？</span></div>
+        <div class="body-row"><span class="body-organ">心臓</span><div class="body-divider"></div><span class="body-meaning">ビジネスモデル</span><span class="body-sub">収益循環構造</span></div>
+        <div class="body-row"><span class="body-organ">脳</span><div class="body-divider"></div><span class="body-meaning">経営陣</span><span class="body-sub">意思決定</span></div>
+        <div class="body-row"><span class="body-organ">血液</span><div class="body-divider"></div><span class="body-meaning">キャッシュ</span><span class="body-sub">酸素</span></div>
       </div>
-      <div>
-        <p class="main-text">
-          ロゴ一つ、フライヤー一枚も、<br>
-          その裏側には企業の思想がある。<br><br>
-          <br>
-          多くの場合、その思想が言語化されていない。<br>
-          だから、ズレが生まれる。<br><br>
+    </div>
+    <div class="main-text philosophy-text" style="padding-top: 0; align-self: start; margin-top: calc(1.3em * 1.3 * 2 + 6rem + 1.8rem); font-size: 0.92rem;">
+      <p>法人とは、法によって人とみなす。<br>私はそう考えたことがあります。</p>
+      <br>
+      <p>ならば企業にも、体があり、体調があり、病がある。</p>
+      <br>
+      <p>多くの課題は、売上や集客ではなく、<br>「なぜやるか」と「どう稼ぐか」がずれたまま<br>動いていることから生まれます。</p>
+      <br><br>
+      <p style="font-size: 1.15rem; font-weight: 300; border-left: 1px solid #000; padding-left: 2rem; line-height: 1.8;">
+        思想のズレが、すべての根本にある。<br>
+        IDDOはまず、人でいう腸を整えます。<br>
+        <span style="font-size:0.95rem;">&mdash;&mdash;思想を言語化し整える。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 ON BRANDING -->
+<section id="branding">
+  <p class="section-label">02 &mdash; ON BRANDING</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;" class="two-col">
+    <div>
+      <h2 style="font-size: clamp(1.6rem, 3.5vw, 3rem); margin-bottom: 3rem;">ブランディングとは<br>何か</h2>
+      <p class="main-text" style="font-size: 0.92rem;">
+        ブランディングという言葉が、一人歩きしているように感じる。
+      </p>
+      <br>
+      <p class="main-text" style="font-size: 0.92rem;">
+        ロゴ、ホームページ、SNS、チラシ、店舗ファサード、看板。それらすべてをまとめて「ブランディング」と呼べば、営業しやすい。商品が売れ、イメージが向上し、集客が増え、認知度も上がる。そんな期待を込めて使われる、都合の良い言葉になってはいないか。
+      </p>
+      <br>
+      <p class="main-text" style="font-size: 0.92rem;">
+        もし「ブランディング」という言葉を使わなかったら、デザイン会社は何と言って営業するだろう。ロゴ作れます、メニュー作れます、パンフレット作れます、ホームページ作れます。
+      </p>
+      <br>
+      <p style="font-size: 0.85rem; font-weight: 300; color: #555; font-family: var(--sans);">
+        デザイナーである私も、この言葉に向き合ってみたいと思った。
+      </p>
+    </div>
+    <div class="main-text" style="align-self: start; font-size: 0.92rem; padding-top: 6rem;">
+      <p>私が考えるブランディングとは、「経営者が変わっても、これまでどおりのサービスや商品を提供でき、かつ時代にそった革新を行える体制づくり」である。</p>
+      <br>
+      <p>ロゴを刷新することは、ブランディングの一環であり、全体ではない。</p>
+      <br>
+      <p>では、なぜその体制づくりが必要なのか。</p>
+      <br>
+      <p style="font-size: 1.15rem; font-weight: 300; border-left: 1px solid #000; padding-left: 2rem; line-height: 1.8;">
+        その企業で働く人が、<br>気持ちよく仕事ができるようにするため。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 CIRCULATION -->
+<section id="circulation">
+  <p class="section-label">03 &mdash; CIRCULATION</p>
+  <h2 style="margin-bottom: 2rem;">ブランディングとは、<br>循環である。</h2>
+  <p class="main-text" style="font-size: 0.92rem; max-width: 38rem;">
+    その先に、循環が生まれる。
+  </p>
+
+  <div class="cycle-flow">
+    <div class="cycle-step">
+      <span class="cycle-num">01</span>
+      <span class="cycle-title">働く人が、気持ちよく仕事ができる</span>
+      <span class="cycle-sub">ブランディングの出発点は、企業の内側にある。</span>
+    </div>
+    <div class="cycle-step">
+      <span class="cycle-num">02</span>
+      <span class="cycle-title">商品やサービスが、消費者をご機嫌な暮らしへ導く</span>
+      <span class="cycle-sub">内側が整った企業から生まれるものは、人の暮らしを豊かにする。</span>
+    </div>
+    <div class="cycle-step">
+      <span class="cycle-num">03</span>
+      <span class="cycle-title">豊かな毎日が、世の中への貢献意欲につながる</span>
+      <span class="cycle-sub">ご機嫌に暮らす人は、自然と社会に関わりたくなる。</span>
+    </div>
+    <div class="cycle-step">
+      <span class="cycle-num">04</span>
+      <span class="cycle-title">貢献が、また企業と社会を支える</span>
+      <span class="cycle-sub">その循環が、企業の存在意義をつくっていく。</span>
+    </div>
+  </div>
+
+  <div class="cycle-conclusion">
+    <p>この循環環境を整えることを前提とした行い。<br>それが、ブランディングという言葉のもつ意味ではないだろうか。</p>
+    <br>
+    <p>そして、この循環をつくるためには、まず「なぜその企業がこの世に存在する必要があるのか」を考えなければならない。その問いに答えるとき、はじめて会社としての思想が必要になる。</p>
+  </div>
+</section>
+
+<!-- 04 WHAT WE DO -->
+<section id="work">
+  <p class="section-label">04 &mdash; WHAT WE DO</p>
+  <h2>整理から、設計へ</h2>
+  <div class="work-grid">
+    <div>
+      <p class="work-phase-label">PHASE 01</p>
+      <p class="work-phase-title">聴く・掘る</p>
+      <p class="work-phase-desc">言語化されていない違和感を、対話によって引き出す。答えは経営者の中にある。</p>
+    </div>
+    <div>
+      <p class="work-phase-label">PHASE 02</p>
+      <p class="work-phase-title">構造化する</p>
+      <p class="work-phase-desc">思想のズレを図解・言語で可視化し、経営の核心を整理する。</p>
+    </div>
+    <div>
+      <p class="work-phase-label">PHASE 03</p>
+      <p class="work-phase-title">言葉を渡す</p>
+      <p class="work-phase-desc">組織に伝わる言語として整理し、判断・採用・対外発信の軸をつくる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ON AI -->
+<section id="ai">
+  <p class="section-label">05 &mdash; ON AI &amp; DESIGN</p>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;" class="two-col">
+    <div>
+      <h2 style="margin-bottom: 3rem; font-size: clamp(1.4rem, 2.5vw, 2.8rem); white-space: nowrap;">AI時代のデザインについて</h2>
+      <p style="font-size: 0.95rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.08em; margin-bottom: 2.5rem; font-family: var(--gothic);">
+        AIは速い。でも、
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+        <p style="font-size: 0.95rem; font-weight: 300; letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.6rem; font-family: var(--gothic);">
+          <span style="display:inline-block; width:0.4em; height:0.4em; background:#000; flex-shrink:0;"></span>方向は決めない
         </p>
-        <div class="highlight-box">
-          <p>
-            IDDOは、表現を作る前に、<br>
-            思想を一緒に言語化する。<br><br>
-            そこから、すべてが始まる。
-          </p>
-        </div>
+        <p style="font-size: 0.95rem; font-weight: 300; letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.6rem; font-family: var(--gothic);">
+          <span style="display:inline-block; width:0.4em; height:0.4em; background:#000; flex-shrink:0;"></span>責任は取らない
+        </p>
+        <p style="font-size: 0.95rem; font-weight: 300; letter-spacing: 0.06em; display: flex; align-items: center; gap: 0.6rem; font-family: var(--gothic);">
+          <span style="display:inline-block; width:0.4em; height:0.4em; background:#000; flex-shrink:0;"></span>想いは汲まない
+        </p>
       </div>
-    </div>
-  </section>
-
-  <!-- WHAT WE DO -->
-  <section id="work">
-    <p class="section-label">02 — What We Do</p>
-    <h2>三つのアプローチ</h2>
-    <div class="work-grid">
-      <div class="work-phase">
-        <p class="work-phase-label">Phase 01</p>
-        <p class="work-phase-title">聴く・掘る</p>
-        <p class="work-phase-desc">言語化されていない違和感を、対話によって引き出す。その先に、本当のニーズがある。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Phase 02</p>
-        <p class="work-phase-title">整える・構造化</p>
-        <p class="work-phase-desc">思想を図解や言語で可視化し、デザインの軸を明確にする。判断基準が生まれる。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Phase 03</p>
-        <p class="work-phase-title">表現する</p>
-        <p class="work-phase-desc">ロゴ、パッケージ、アプリなど、その思想を視覚と言語に翻訳する。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO SECTIONS -->
-  <!-- GRAPHIC -->
-  <section class="portfolio-section active" data-portfolio="graphic">
-    <p class="section-label">03 — Graphic Design</p>
-    <h2>視覚で、思想を伝える</h2>
-    <div class="work-grid">
-      <div class="work-phase">
-        <p class="work-phase-label">Logo Design</p>
-        <p class="work-phase-title">ロゴ</p>
-        <p class="work-phase-desc">企業のアイデンティティを、シンボルに凝縮する。そのロゴを見たとき、思想が伝わる。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Package Design</p>
-        <p class="work-phase-title">パッケージ</p>
-        <p class="work-phase-desc">商品との最初の接点。価値を高める視覚表現。手に取った瞬間の体験がすべて。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Promotional Design</p>
-        <p class="work-phase-title">販促物</p>
-        <p class="work-phase-desc">フライヤー、DM、ポスター。紙を通じて、思想が伝わる。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- APP -->
-  <section class="portfolio-section" data-portfolio="app">
-    <p class="section-label">03 — App Development</p>
-    <h2>機能で、思想を体験させる</h2>
-    <div class="work-grid">
-      <div class="work-phase">
-        <p class="work-phase-label">Company Temperature</p>
-        <p class="work-phase-title">会社の体温計</p>
-        <p class="work-phase-desc">組織の健全性を可視化。共感、信頼、期待、自律を数値化し、経営の意思決定に活かす。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Customer Loyalty</p>
-        <p class="work-phase-title">常連さん</p>
-        <p class="work-phase-desc">ボトルキープ管理で顧客との関係を深化させる。来店動機を可視化し、ビジネスの本質を見つめ直す。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Food Analytics</p>
-        <p class="work-phase-title">なにをたべたかな</p>
-        <p class="work-phase-desc">食事記録とAI分析で、自分の体と向き合う。「人間の体は食べたもので出来ている歴史」を可視化。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CREATION -->
-  <section class="portfolio-section" data-portfolio="creation">
-    <p class="section-label">03 — Creative Works</p>
-    <h2>物語を、形にする</h2>
-    <div class="work-grid">
-      <div class="work-phase">
-        <p class="work-phase-label">Picture Books</p>
-        <p class="work-phase-title">絵本創作</p>
-        <p class="work-phase-desc">想像の世界を、紙の上に再現する。子どもから大人まで、心に届く物語。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Textile Design</p>
-        <p class="work-phase-title">織物・パターン</p>
-        <p class="work-phase-desc">陶芸のように、繰り返しの中に美学を込める。日常を、アートに変える。</p>
-      </div>
-      <div class="work-phase">
-        <p class="work-phase-label">Counseling</p>
-        <p class="work-phase-title">キャリアカウンセリング</p>
-        <p class="work-phase-desc">認定キャリアカウンセラーとしての視点。人生の選択を、一緒に考える。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NAV BUTTONS -->
-  <section style="padding: 6rem 4rem; border-top: 1px solid var(--ink); display: flex; gap: 1rem; justify-content: center;">
-    <button class="nav-btn" data-portfolio="graphic" style="padding: 0.6rem 1.8rem; border: 1px solid var(--ink); background: white; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em;">Graphic</button>
-    <button class="nav-btn" data-portfolio="app" style="padding: 0.6rem 1.8rem; border: 1px solid var(--ink); background: white; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em;">App</button>
-    <button class="nav-btn" data-portfolio="creation" style="padding: 0.6rem 1.8rem; border: 1px solid var(--ink); background: white; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em;">Creation</button>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label">04 — Contact</p>
-    <h2>違和感から、<br>ともに始めましょう</h2>
-
-    <div class="contact-box">
-      <p class="contact-box-title">First Consultation</p>
-      <p class="contact-box-heading">初回相談</p>
-      <p class="contact-box-text">
-        「何を相談すればいいのかわからない」という状態でも、ここから始められます。
-      </p>
-      <p class="contact-box-text" style="color: var(--gray);">
-        ※ お会いすることを大事にしていますので、メールのみのご相談は受けていません。福岡市内でのお打ち合わせを基本としています。
+      <p style="font-size: 0.8rem; font-weight: 300; line-height: 1.5; letter-spacing: 0.08em; margin-top: 2.5rem; color: #555; font-family: var(--sans);">
+        始めるのも決めるのも人間です。いまのところ（笑）
       </p>
     </div>
-
-    <div class="contact-item">
-      <span class="contact-item-label">Email</span>
-      <a href="mailto:hello@iddo-design.jp" class="contact-item-value">hello@iddo-design.jp</a>
-    </div>
-
-    <div class="contact-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
-      <span class="contact-item-label">Phone</span>
-      <a href="tel:09000000000" class="contact-item-value">お問い合わせフォームからご連絡ください</a>
-    </div>
-  </section>
-
-  <!-- NOTE -->
-  <section style="padding: 8rem 4rem; border-top: 1px solid var(--ink);">
-    <div class="note-section">
-      <p class="note-label">— Note —</p>
-      <p class="note-text">
-        このサイトに、色も写真もありません。<br><br>
-        シンプルだからこそ、<br>
-        余白があるからこそ、<br>
-        あなたの想像が必要です。<br><br>
-        IDDOの仕事は、その想像力を引き出すこと。<br>
-        デザインとは、対話である。
-      </p>
-      <p class="note-credit">
-        代表：こーだい<br>
-        グラフィックデザイナー・キャリアカウンセラー<br>
-        <br>
-        IDDO Design Office<br>
-        Based in Fukuoka, Japan
+    <div class="main-text" style="align-self: center; font-size: 0.92rem;">
+      <p>AIは生成できます。<br>しかし、何を生成すべきかは決められません。</p>
+      <br>
+      <p>企業の思想をくみとり、それを視覚と言語に翻訳する判断軸は、思想整理から関わった人間にしか持てない。</p>
+      <br>
+      <p style="font-size: 1.1rem; font-weight: 100; border-left: 1px solid #000; padding-left: 2rem; line-height: 1.6;">
+        IDDOは、その上流から関わります。
       </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-left">
-      <p class="footer-logo">IDDO</p>
-      <p class="footer-text">Design Office</p>
+<!-- 06 CONTACT -->
+<section id="contact" style="padding:15rem 4rem;">
+  <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 8rem;" class="two-col">
+    <div>
+      <p class="section-label">06 &mdash; CONTACT</p>
+      <h2 style="margin-bottom: 7rem; font-size: clamp(1.6rem, 3.5vw, 2.8rem);">違和感の言語化から<br>ともに始めましょう</h2>
+
+      <div style="border: 1px solid #000; padding: 2rem 2.5rem; margin-bottom: 4rem; display: inline-block;">
+        <p style="font-family:var(--mono); font-size:0.7rem; letter-spacing:0.3em; margin-bottom:0.8rem;">FIRST SESSION</p>
+        <p style="font-size:1.4rem; font-weight:100; letter-spacing:0.1em;">初回相談 1時間 <em style="font-style:normal; font-weight:400;">&yen;3,000〜</em><span style="font-size:0.7rem;">（税込）</span></p>
+        <p style="font-size:0.8rem; font-weight:300; line-height:1.8; margin-top:0.8rem; color:#444;">「何を相談すべきかわからない」という状態でも、ここから始められます。</p>
+        <p style="font-size:0.8rem; font-weight:300; line-height:1.8; margin-top:0.5rem; color:#444;">初回はお会いすることを大事にしていますので、<br>メールのみの相談・電話のみの相談は受けていません。</p>
+        <p style="font-size:0.7rem; font-weight:300; line-height:1.8; margin-top:0.8rem; color:#888;">※ 福岡市内以外は出張費が別途必要です。</p>
+      </div>
+
+      <p style="font-family:var(--mono); font-size:0.7rem; letter-spacing:0.3em; margin-bottom:1.5rem;">お問い合わせ</p>
+
+      <div style="display:flex; align-items:baseline; border-bottom: 1px solid #000; padding-bottom: 1rem; margin-bottom: 2rem;">
+        <span style="font-family:var(--mono); font-weight:300; min-width: 8rem; font-size: 0.9rem; letter-spacing: 0.2em;">MAIL</span>
+        <a href="mailto:info@iddo.one" style="color: #000; text-decoration: none; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.05em; font-family: var(--gothic);">
+          info@iddo.one
+        </a>
+      </div>
+
+      <div style="display:flex; align-items:baseline; border-bottom: 1px solid #000; padding-bottom: 1rem;">
+        <span style="font-family:var(--mono); font-weight:300; min-width: 8rem; font-size: 0.9rem; letter-spacing: 0.2em;">TEL</span>
+        <a href="tel:09043489498" style="color: #000; text-decoration: none; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.05em; font-family: var(--gothic);">
+          090-4348-9498
+        </a>
+      </div>
     </div>
-    <div class="footer-right">
-      <p class="footer-text">© 2026 IDDO Design Office</p>
-      <p class="footer-text">All Rights Reserved</p>
+    <div></div>
+  </div>
+</section>
+
+<!-- NOTE -->
+<section id="note" style="padding: 12rem 4rem; border-top: 1px solid #000;">
+  <div style="max-width: 36rem; margin: 0 auto; text-align: center;">
+    <p style="font-family:var(--mono); font-size:0.7rem; letter-spacing:0.4em; margin-bottom:4rem;">&mdash; NOTE &mdash;</p>
+    <p style="font-size:1.15rem; font-weight:300; line-height:2.4; letter-spacing:0.08em; font-family: var(--gothic);">
+      このサイトに、写真も色もありません。<br><br>
+      日本語は活字になった瞬間、<br>
+      読む人によって受け取り方が変わります。<br><br>
+      余白と文字だけで構成されたこのサイトを、<br>
+      あなたが今どう感じたか。<br><br>
+      それが、IDDOの仕事の本質です。
+    </p>
+    <p style="font-size: 0.8rem; font-weight: 300; line-height: 2.2; letter-spacing: 0.08em; margin-top: 3rem; font-family: var(--sans);">
+      AIを使ううちに、いかに思想が大事かと気づきました。
+    </p>
+    <p style="font-size: 0.8rem; margin-top: 0.8rem; font-weight: 300; color: #000; letter-spacing: 0.05em; font-family: var(--sans);">
+      このホームページはAIに手伝ってもらいました。<br><br>デザイナー　岩崎 宏大
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding: 5rem 4rem 3rem; border-top: 1px solid #000; background: #fff;">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+    <div>
+      <span class="nav-logo" style="font-size: 0.8rem;">iddo</span>
+      <p style="font-size: 0.65rem; letter-spacing: 0.1em; margin-top: 0.5rem; font-weight: 300; font-family: var(--gothic);">iwasaki design delivery officer</p>
+      <p style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; margin-top: 0.3rem; font-weight: 300;">since 2026</p>
     </div>
-  </footer>
+    <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.8rem;">
+      <p style="font-family: var(--mono); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.05em;">
+        &copy; <span id="y"></span> IDDO
+      </p>
+      <a href="https://www.instagram.com/iddoto2026" target="_blank" rel="noopener" title="Instagram @iddoto2026"
+         style="display: inline-flex; align-items: center; gap: 0.5rem; color: #000; text-decoration: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.15em; border-bottom: 1px solid #000; padding-bottom: 2px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+        @iddoto2026
+      </a>
+    </div>
+  </div>
+  <p style="font-size: 0.65rem; line-height: 1.9; margin-top: 3rem; font-weight: 300; color: #666; font-family: var(--gothic); border-top: 1px solid #eee; padding-top: 2rem;">
+    このサイトは、現時点での私自身が納得している考え方を掲載しています。さまざまな人との関わりの中で、報告もせず内容が変わることもあることをあらかじめご了承ください。
+  </p>
+</footer>
 
-  <script>
-    // Portfolio section toggle
-    const navBtns = document.querySelectorAll('.nav-btn');
-    const portfolioSections = document.querySelectorAll('.portfolio-section');
-
-    navBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const portfolio = e.target.dataset.portfolio;
-        
-        // Update active button
-        navBtns.forEach(b => b.style.background = 'white');
-        e.target.style.background = 'var(--ink)';
-        e.target.style.color = 'white';
-
-        // Show selected section
-        portfolioSections.forEach(section => {
-          section.classList.remove('active');
-        });
-        document.querySelector(`[data-portfolio="${portfolio}"]`).classList.add('active');
-      });
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href="#contact"]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
-
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
