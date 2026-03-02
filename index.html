@@ -1,641 +1,734 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDDO Design Office - グラフィックデザイン・アプリ開発</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDDO Design Office — グラフィック・アプリ・創作活動</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #000000;
+      --paper: #ffffff;
+      --gray: #888888;
+      --light-gray: #e8e8e8;
+      --serif: 'Noto Serif JP', serif;
+      --sans: 'Noto Sans JP', sans-serif;
+    }
 
-        :root {
-            --primary: #1a1a1a;
-            --secondary: #6b7280;
-            --light: #f5f5f0;
-            --border: #e5e7eb;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            color: var(--primary);
-            line-height: 1.6;
-        }
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        /* Header */
-        header {
-            position: fixed;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-            padding: 1.5rem 2rem;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+      background-color: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid var(--ink);
+    }
 
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-decoration: none;
+      color: var(--ink);
+    }
 
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-        }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      color: var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+    }
 
-        .logo strong {
-            font-weight: 600;
-        }
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      padding-top: 6rem;
+      border-top: none;
+    }
 
-        nav {
-            display: flex;
-            gap: 2rem;
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 4rem;
+      border-right: 1px solid var(--ink);
+    }
 
-        nav button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--secondary);
-            transition: color 0.3s;
-            padding: 0.5rem 0;
-        }
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      color: var(--gray);
+    }
 
-        nav button:hover,
-        nav button.active {
-            color: var(--primary);
-            font-weight: 500;
-        }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      margin-bottom: 4rem;
+    }
 
-        nav a {
-            color: var(--secondary);
-            transition: color 0.3s;
-        }
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 4rem;
+    }
 
-        nav a:hover {
-            color: var(--primary);
-        }
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 2;
+      max-width: 100%;
+      margin-bottom: 4rem;
+      font-weight: 300;
+      font-family: var(--sans);
+    }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+    .hero-tagline {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      border-top: 1px solid var(--ink);
+      padding-top: 2rem;
+      font-weight: 300;
+      font-family: var(--sans);
+      color: var(--gray);
+    }
 
-        /* Hero Section */
-        .hero {
-            margin-top: 80px;
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* ── SECTIONS ── */
+    section:not(#hero) {
+      padding: 10rem 4rem;
+      border-top: 1px solid var(--ink);
+    }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
+    .section-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 4rem;
+      font-weight: 400;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
 
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--secondary);
-            font-weight: 300;
-            max-width: 600px;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
+    h2 {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      margin-bottom: 3rem;
+    }
 
-        .hero-divider {
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary);
-            margin-bottom: 3rem;
-        }
+    .main-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      font-weight: 300;
+      font-family: var(--sans);
+      max-width: 100%;
+    }
 
-        /* Category Section */
-        .category-section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* ── PHILOSOPHY MODEL ── */
+    .body-model {
+      margin: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
 
-        .category-header {
-            margin-bottom: 3rem;
-        }
+    .body-row {
+      display: flex;
+      align-items: center;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--light-gray);
+      gap: 0;
+    }
 
-        .category-header h2 {
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-        }
+    .body-row:first-child {
+      border-top: 1px solid var(--light-gray);
+    }
 
-        .category-divider {
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), transparent);
-        }
+    .body-organ {
+      font-size: 0.75rem;
+      text-align: right;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+      font-family: var(--sans);
+      flex: 0 0 4rem;
+    }
 
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
+    .body-divider {
+      height: 1px;
+      flex: 0 0 1.2rem;
+      background-color: var(--ink);
+      margin: 0 1.5rem;
+    }
 
-        .portfolio-card {
-            border-radius: 8px;
-            padding: 2rem;
-            color: white;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+    .body-meaning {
+      font-size: 0.9rem;
+      font-weight: 400;
+      font-family: var(--sans);
+      flex: 0 0 9rem;
+    }
 
-        .portfolio-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
+    .body-sub {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: var(--gray);
+      font-family: var(--sans);
+      flex: 1;
+    }
 
-        .portfolio-card h3 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-        }
+    /* ── WORK GRID ── */
+    .work-grid {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+    }
 
-        .portfolio-card p {
-            font-size: 0.95rem;
-            font-weight: 300;
-            opacity: 0.95;
-        }
+    .work-phase {
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
 
-        .portfolio-card .tech {
-            font-size: 0.75rem;
-            font-weight: 300;
-            opacity: 0.8;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            margin-top: 1rem;
-        }
+    .work-phase-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1.2rem;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
 
-        /* Gradient Colors */
-        .grad-1 { background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%); }
-        .grad-2 { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); }
-        .grad-3 { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); }
-        .grad-4 { background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%); }
-        .grad-5 { background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%); }
-        .grad-6 { background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%); }
-        .grad-7 { background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%); }
-        .grad-8 { background: linear-gradient(135deg, #84cc16 0%, #22c55e 100%); }
+    .work-phase-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-family: var(--serif);
+      margin-bottom: 1rem;
+    }
 
-        /* About Section */
-        .about {
-            background: white;
-            padding: 4rem 2rem;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
+    .work-phase-desc {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      font-weight: 300;
+      color: #555;
+    }
 
-        .about-container {
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    /* ── TWO COLUMN ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
 
-        .about h2 {
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-        }
+    .highlight-box {
+      border-left: 2px solid var(--ink);
+      padding-left: 2rem;
+      margin-top: 2rem;
+    }
 
-        .about .divider {
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), transparent);
-            margin-bottom: 2rem;
-        }
+    .highlight-box p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      font-family: var(--sans);
+    }
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
-        }
+    /* ── CONTACT ── */
+    .contact-box {
+      border: 1px solid var(--ink);
+      padding: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      max-width: 400px;
+    }
 
-        .about-col h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 600;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-        }
+    .contact-box-title {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
 
-        .about-col ul {
-            list-style: none;
-            space-y: 0.75rem;
-        }
+    .contact-box-heading {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
 
-        .about-col li {
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: #555;
-            margin-bottom: 0.75rem;
-            line-height: 1.6;
-        }
+    .contact-box-text {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      font-weight: 300;
+      color: #555;
+      margin-bottom: 0.8rem;
+    }
 
-        .about-col p {
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: #555;
-            line-height: 1.8;
-        }
+    .contact-item {
+      display: flex;
+      align-items: baseline;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
 
-        /* Contact Section */
-        .contact {
-            padding: 4rem 2rem;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
+    .contact-item-label {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      min-width: 6rem;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
 
-        .contact h2 {
-            font-size: 2rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-        }
+    .contact-item-value {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      flex: 1;
+    }
 
-        .contact .divider {
-            width: 40px;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), transparent);
-            margin: 0 auto 2rem;
-        }
+    .contact-item-value:hover {
+      text-decoration: underline;
+    }
 
-        .contact p {
-            font-size: 0.95rem;
-            color: var(--secondary);
-            font-weight: 300;
-            max-width: 500px;
-            margin: 1rem auto;
-            line-height: 1.8;
-        }
+    /* ── NOTE SECTION ── */
+    .note-section {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
+    .note-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      margin-bottom: 3rem;
+      color: var(--gray);
+      text-transform: uppercase;
+    }
 
-        .btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 300;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+    .note-text {
+      font-size: 1rem;
+      line-height: 2.2;
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
+    .note-credit {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--gray);
+    }
 
-        .btn-primary:hover {
-            background-color: #333;
-        }
+    /* ── FOOTER ── */
+    footer {
+      padding: 4rem;
+      border-top: 1px solid var(--ink);
+      background: var(--paper);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
 
-        .btn-secondary {
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-        }
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .btn-secondary:hover {
-            background-color: var(--light);
-        }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
 
-        /* Footer */
-        footer {
-            background-color: var(--primary);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 300;
-        }
+    .footer-text {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      font-weight: 300;
+      color: var(--gray);
+    }
 
-        footer p {
-            margin: 0.5rem 0;
-        }
+    .footer-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
-        .footer-secondary {
-            color: #999;
-            margin-top: 0.5rem;
-        }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      #hero {
+        grid-template-columns: 1fr;
+      }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                padding: 1rem;
-            }
+      .hero-left {
+        border-right: none;
+        border-bottom: 1px solid var(--ink);
+      }
 
-            nav {
-                display: none;
-            }
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
 
-            .mobile-menu-btn {
-                display: block;
-            }
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
 
-            .hero {
-                margin-top: 70px;
-                padding: 2rem 1rem;
-            }
+      section:not(#hero) {
+        padding: 6rem 2rem;
+      }
 
-            .hero h1 {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-            }
+      nav {
+        padding: 1.5rem 2rem;
+      }
 
-            .hero p {
-                font-size: 0.95rem;
-            }
+      .hero-left,
+      .hero-right {
+        padding: 4rem 2rem;
+      }
 
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
+      footer {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: left;
+      }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+      .footer-right {
+        text-align: left;
+      }
 
-            .contact-buttons {
-                flex-direction: column;
-            }
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
 
-            .btn {
-                width: 100%;
-            }
-        }
+    /* ── HIDDEN SECTIONS ── */
+    .portfolio-section {
+      display: none;
+    }
 
-        /* Hidden Section */
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-    </style>
+    .portfolio-section.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo"><strong>IDDO</strong> Design Office</div>
-            <nav>
-                <button class="nav-btn active" data-category="graphic">グラフィック</button>
-                <button class="nav-btn" data-category="app">アプリ開発</button>
-                <button class="nav-btn" data-category="picture">絵本創作</button>
-                <button class="nav-btn" data-category="other">その他</button>
-                <a href="#contact">お問い合わせ</a>
-            </nav>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>創造性と戦略で<br>ブランドを構築する</h1>
-        <p>
-            IDDO Design Office は、ロゴからアプリケーション、創作活動まで、<br>
-            デジタル時代における包括的なクリエイティブソリューションを提供します。<br>
-            <span style="font-size: 0.85rem; color: #999; display: block; margin-top: 1rem;">代表：こーだい / グラフィックデザイナー・キャリアカウンセラー</span>
+  <nav>
+    <a href="#hero" class="nav-logo">IDDO</a>
+    <a href="#contact" class="nav-cta">CONTACT →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">創造性と経営思想で</p>
+      <h1 class="hero-title">
+        ブランドの本質を<br>
+        整える
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">
+        美しいデザインも優れたアプリも<br>
+        経営思想が整っていなければ、<br>
+        持続しない。<br><br>
+        IDDOは、ビジネスの根本から<br>
+        一緒に考える。
+      </p>
+      <p class="hero-tagline">ロゴ・パッケージ・アプリ・創作活動</p>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy">
+    <p class="section-label">01 — Philosophy</p>
+    <div class="two-col">
+      <div>
+        <h2>デザインは思想の<br>表現である</h2>
+        <div class="body-model">
+          <div class="body-row">
+            <span class="body-organ">思想</span>
+            <div class="body-divider"></div>
+            <span class="body-meaning">Why</span>
+            <span class="body-sub">なぜやるのか</span>
+          </div>
+          <div class="body-row">
+            <span class="body-organ">戦略</span>
+            <div class="body-divider"></div>
+            <span class="body-meaning">How</span>
+            <span class="body-sub">どう伝えるか</span>
+          </div>
+          <div class="body-row">
+            <span class="body-organ">表現</span>
+            <div class="body-divider"></div>
+            <span class="body-meaning">What</span>
+            <span class="body-sub">何を作るか</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="main-text">
+          ロゴ一つ、フライヤー一枚も、<br>
+          その裏側には企業の思想がある。<br><br>
+          <br>
+          多くの場合、その思想が言語化されていない。<br>
+          だから、ズレが生まれる。<br><br>
         </p>
-        <div class="hero-divider"></div>
-    </section>
-
-    <!-- Portfolio: Graphic Design -->
-    <section class="section active" data-section="graphic">
-        <div class="category-section">
-            <div class="category-header">
-                <h2>グラフィックデザイン</h2>
-                <div class="category-divider"></div>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card grad-1">
-                    <div>
-                        <h3>ロゴデザイン</h3>
-                        <p>ブランドアイデンティティの構築</p>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-2">
-                    <div>
-                        <h3>パッケージデザイン</h3>
-                        <p>商品価値を高める視覚表現</p>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-3">
-                    <div>
-                        <h3>フライヤー・DM</h3>
-                        <p>印刷物による効果的なコミュニケーション</p>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-4">
-                    <div>
-                        <h3>企業VI・ブランディング</h3>
-                        <p>統一された視覚体験の実現</p>
-                    </div>
-                </div>
-            </div>
+        <div class="highlight-box">
+          <p>
+            IDDOは、表現を作る前に、<br>
+            思想を一緒に言語化する。<br><br>
+            そこから、すべてが始まる。
+          </p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Portfolio: App Development -->
-    <section class="section" data-section="app">
-        <div class="category-section">
-            <div class="category-header">
-                <h2>アプリ開発</h2>
-                <div class="category-divider"></div>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card grad-1">
-                    <div>
-                        <h3>会社の体温計</h3>
-                        <p>ウェルネストラッキング - 組織の健全性を可視化</p>
-                        <div class="tech">React Native, tRPC, MySQL</div>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-2">
-                    <div>
-                        <h3>常連さん</h3>
-                        <p>顧客ロイヤルティ - ボトルキープ管理ツール</p>
-                        <div class="tech">React Native, Expo</div>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-5">
-                    <div>
-                        <h3>なにをたべたかな</h3>
-                        <p>食事記録 - AI栄養分析で健康をサポート</p>
-                        <div class="tech">React Native, AI Analysis</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- WHAT WE DO -->
+  <section id="work">
+    <p class="section-label">02 — What We Do</p>
+    <h2>三つのアプローチ</h2>
+    <div class="work-grid">
+      <div class="work-phase">
+        <p class="work-phase-label">Phase 01</p>
+        <p class="work-phase-title">聴く・掘る</p>
+        <p class="work-phase-desc">言語化されていない違和感を、対話によって引き出す。その先に、本当のニーズがある。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Phase 02</p>
+        <p class="work-phase-title">整える・構造化</p>
+        <p class="work-phase-desc">思想を図解や言語で可視化し、デザインの軸を明確にする。判断基準が生まれる。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Phase 03</p>
+        <p class="work-phase-title">表現する</p>
+        <p class="work-phase-desc">ロゴ、パッケージ、アプリなど、その思想を視覚と言語に翻訳する。</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Portfolio: Picture Books -->
-    <section class="section" data-section="picture">
-        <div class="category-section">
-            <div class="category-header">
-                <h2>絵本創作</h2>
-                <div class="category-divider"></div>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card grad-6">
-                    <div>
-                        <h3>創作絵本企画中</h3>
-                        <p>こーだいの創造の世界へ</p>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-7">
-                    <div>
-                        <h3>イラストレーション</h3>
-                        <p>個性的で温かみのある世界観</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- PORTFOLIO SECTIONS -->
+  <!-- GRAPHIC -->
+  <section class="portfolio-section active" data-portfolio="graphic">
+    <p class="section-label">03 — Graphic Design</p>
+    <h2>視覚で、思想を伝える</h2>
+    <div class="work-grid">
+      <div class="work-phase">
+        <p class="work-phase-label">Logo Design</p>
+        <p class="work-phase-title">ロゴ</p>
+        <p class="work-phase-desc">企業のアイデンティティを、シンボルに凝縮する。そのロゴを見たとき、思想が伝わる。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Package Design</p>
+        <p class="work-phase-title">パッケージ</p>
+        <p class="work-phase-desc">商品との最初の接点。価値を高める視覚表現。手に取った瞬間の体験がすべて。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Promotional Design</p>
+        <p class="work-phase-title">販促物</p>
+        <p class="work-phase-desc">フライヤー、DM、ポスター。紙を通じて、思想が伝わる。</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Portfolio: Other -->
-    <section class="section" data-section="other">
-        <div class="category-section">
-            <div class="category-header">
-                <h2>その他の実績</h2>
-                <div class="category-divider"></div>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card grad-3">
-                    <div>
-                        <h3>テキスタイルデザイン</h3>
-                        <p>織物・パターン設計</p>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-8">
-                    <div>
-                        <h3>健康食品開発企画</h3>
-                        <p>発酵食品製品開発</p>
-                    </div>
-                </div>
-                <div class="portfolio-card grad-6">
-                    <div>
-                        <h3>キャリアカウンセリング</h3>
-                        <p>認定キャリアカウンセラー</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- APP -->
+  <section class="portfolio-section" data-portfolio="app">
+    <p class="section-label">03 — App Development</p>
+    <h2>機能で、思想を体験させる</h2>
+    <div class="work-grid">
+      <div class="work-phase">
+        <p class="work-phase-label">Company Temperature</p>
+        <p class="work-phase-title">会社の体温計</p>
+        <p class="work-phase-desc">組織の健全性を可視化。共感、信頼、期待、自律を数値化し、経営の意思決定に活かす。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Customer Loyalty</p>
+        <p class="work-phase-title">常連さん</p>
+        <p class="work-phase-desc">ボトルキープ管理で顧客との関係を深化させる。来店動機を可視化し、ビジネスの本質を見つめ直す。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Food Analytics</p>
+        <p class="work-phase-title">なにをたべたかな</p>
+        <p class="work-phase-desc">食事記録とAI分析で、自分の体と向き合う。「人間の体は食べたもので出来ている歴史」を可視化。</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- About -->
-    <section class="about">
-        <div class="about-container">
-            <h2>IDDO Design Office について</h2>
-            <div class="divider"></div>
-            <div class="about-grid">
-                <div class="about-col">
-                    <h3>専門分野</h3>
-                    <ul>
-                        <li>• ロゴ・ブランドデザイン</li>
-                        <li>• パッケージ・販促デザイン</li>
-                        <li>• アプリケーション開発</li>
-                        <li>• テキスタイル・商品デザイン</li>
-                        <li>• キャリアカウンセリング</li>
-                    </ul>
-                </div>
-                <div class="about-col">
-                    <h3>思い</h3>
-                    <p>
-                        真のブランディングは、視覚的な美しさだけではなく、ビジネスの本質を見つめ、持続可能な戦略構築から始まると考えています。クライアントの理想と現実のギャップを埋め、創造的で機能的なソリューションを提供します。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- CREATION -->
+  <section class="portfolio-section" data-portfolio="creation">
+    <p class="section-label">03 — Creative Works</p>
+    <h2>物語を、形にする</h2>
+    <div class="work-grid">
+      <div class="work-phase">
+        <p class="work-phase-label">Picture Books</p>
+        <p class="work-phase-title">絵本創作</p>
+        <p class="work-phase-desc">想像の世界を、紙の上に再現する。子どもから大人まで、心に届く物語。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Textile Design</p>
+        <p class="work-phase-title">織物・パターン</p>
+        <p class="work-phase-desc">陶芸のように、繰り返しの中に美学を込める。日常を、アートに変える。</p>
+      </div>
+      <div class="work-phase">
+        <p class="work-phase-label">Counseling</p>
+        <p class="work-phase-title">キャリアカウンセリング</p>
+        <p class="work-phase-desc">認定キャリアカウンセラーとしての視点。人生の選択を、一緒に考える。</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <h2>プロジェクトのご相談</h2>
-        <div class="divider"></div>
-        <p>新規プロジェクト、デザイン相談、アプリ開発のお問い合わせはこちらからお気軽にどうぞ。</p>
-        <div class="contact-buttons">
-            <a href="mailto:contact@iddo-design.jp" class="btn btn-primary">メール送信</a>
-            <button class="btn btn-secondary">詳細情報 →</button>
-        </div>
-    </section>
+  <!-- NAV BUTTONS -->
+  <section style="padding: 6rem 4rem; border-top: 1px solid var(--ink); display: flex; gap: 1rem; justify-content: center;">
+    <button class="nav-btn" data-portfolio="graphic" style="padding: 0.6rem 1.8rem; border: 1px solid var(--ink); background: white; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em;">Graphic</button>
+    <button class="nav-btn" data-portfolio="app" style="padding: 0.6rem 1.8rem; border: 1px solid var(--ink); background: white; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em;">App</button>
+    <button class="nav-btn" data-portfolio="creation" style="padding: 0.6rem 1.8rem; border: 1px solid var(--ink); background: white; cursor: pointer; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.1em;">Creation</button>
+  </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 IDDO Design Office. All Rights Reserved.</p>
-        <p class="footer-secondary">Based in Fukuoka, Japan</p>
-    </footer>
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">04 — Contact</p>
+    <h2>違和感から、<br>ともに始めましょう</h2>
 
-    <script>
-        // Navigation
-        const navBtns = document.querySelectorAll('.nav-btn');
-        const sections = document.querySelectorAll('.section');
+    <div class="contact-box">
+      <p class="contact-box-title">First Consultation</p>
+      <p class="contact-box-heading">初回相談</p>
+      <p class="contact-box-text">
+        「何を相談すればいいのかわからない」という状態でも、ここから始められます。
+      </p>
+      <p class="contact-box-text" style="color: var(--gray);">
+        ※ お会いすることを大事にしていますので、メールのみのご相談は受けていません。福岡市内でのお打ち合わせを基本としています。
+      </p>
+    </div>
 
-        navBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const category = e.target.dataset.category;
-                
-                // Update active button
-                navBtns.forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
+    <div class="contact-item">
+      <span class="contact-item-label">Email</span>
+      <a href="mailto:hello@iddo-design.jp" class="contact-item-value">hello@iddo-design.jp</a>
+    </div>
 
-                // Show selected section
-                sections.forEach(s => s.classList.remove('active'));
-                document.querySelector(`[data-section="${category}"]`).classList.add('active');
-            });
+    <div class="contact-item" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
+      <span class="contact-item-label">Phone</span>
+      <a href="tel:09000000000" class="contact-item-value">お問い合わせフォームからご連絡ください</a>
+    </div>
+  </section>
+
+  <!-- NOTE -->
+  <section style="padding: 8rem 4rem; border-top: 1px solid var(--ink);">
+    <div class="note-section">
+      <p class="note-label">— Note —</p>
+      <p class="note-text">
+        このサイトに、色も写真もありません。<br><br>
+        シンプルだからこそ、<br>
+        余白があるからこそ、<br>
+        あなたの想像が必要です。<br><br>
+        IDDOの仕事は、その想像力を引き出すこと。<br>
+        デザインとは、対話である。
+      </p>
+      <p class="note-credit">
+        代表：こーだい<br>
+        グラフィックデザイナー・キャリアカウンセラー<br>
+        <br>
+        IDDO Design Office<br>
+        Based in Fukuoka, Japan
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <p class="footer-logo">IDDO</p>
+      <p class="footer-text">Design Office</p>
+    </div>
+    <div class="footer-right">
+      <p class="footer-text">© 2026 IDDO Design Office</p>
+      <p class="footer-text">All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    // Portfolio section toggle
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const portfolioSections = document.querySelectorAll('.portfolio-section');
+
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const portfolio = e.target.dataset.portfolio;
+        
+        // Update active button
+        navBtns.forEach(b => b.style.background = 'white');
+        e.target.style.background = 'var(--ink)';
+        e.target.style.color = 'white';
+
+        // Show selected section
+        portfolioSections.forEach(section => {
+          section.classList.remove('active');
         });
+        document.querySelector(`[data-portfolio="${portfolio}"]`).classList.add('active');
+      });
+    });
 
-        // Smooth scroll for contact link
-        document.querySelectorAll('a[href="#contact"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
+    // Smooth scroll
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
 </body>
 </html>
